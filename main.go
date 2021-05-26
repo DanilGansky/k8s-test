@@ -19,9 +19,9 @@ func init() {
 }
 
 func homeHandler(w http.ResponseWriter, r *http.Request) {
-	log.Printf("request from %s at %s", r.RemoteAddr, time.Now().Format("Mon Jan 2 15:04:05 2006"))
+	log.Printf("request from %s at %s", r.Host, time.Now().Format("Mon Jan 2 15:04:05 2006"))
 
-	err := rnd.Template(w, http.StatusOK, []string{"./public/index.tpls"}, map[string]interface{}{"ip": r.RemoteAddr})
+	err := rnd.Template(w, http.StatusOK, []string{"./public/index.tpls"}, map[string]interface{}{"ip": r.Host})
 	if err != nil {
 		log.Fatalf("error in %s: %s", r.RemoteAddr, err.Error())
 	}
