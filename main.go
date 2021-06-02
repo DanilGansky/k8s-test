@@ -1,6 +1,8 @@
 package main
 
 import (
+	"encoding/json"
+	"k8s-test/storage"
 	"log"
 	"net"
 	"net/http"
@@ -43,10 +45,18 @@ func homeHandler(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+func getItemsHandler(w http.ResponseWriter, r *http.Request) {
+	log.Printf("request from %s at %s", localIP, time.Now().Format("Mon Jan 2 15:04:05 2006"))
+	if err := json.NewEncoder(w).Encode(storage.GetItems(100000)); err != nil {
+		log.Fatalf("error in %s: %s", localIP, err.Error())
+	}
+}
+
 func main() {
 	const port = ":8000"
 
 	http.HandleFunc("/", homeHandler)
+	http.HandleFunc("/items", getItemsHandler)
 	log.Printf("Server started at %s...", port)
 
 	if err := http.ListenAndServe(port, nil); err != nil {
