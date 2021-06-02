@@ -1,0 +1,4 @@
+# Values for production
+Autoscaling:
+  Min: 4
+  Max: 8

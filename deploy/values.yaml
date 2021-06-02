@@ -12,3 +12,7 @@ Utilization:
 
 Container:
   Image: dgansky/k8s-test:latest
+
+Autoscaling:
+  Min: 3
+  Max: 6
