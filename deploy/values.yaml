@@ -1,0 +1,14 @@
+# Default values
+Resources:
+  MaxCPU: 250m
+  MaxMemory: 0.25Gi
+
+  CPU: 200m
+  Memory: 0.2Gi
+
+Utilization:
+  CPU: 40
+  Memory: 35
+
+Container:
+  Image: dgansky/k8s-test:latest
