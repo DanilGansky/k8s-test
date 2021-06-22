@@ -1,6 +1,6 @@
 module k8s-test
 
-go 1.13
+go 1.16
 
 require (
 	github.com/thedevsaddam/renderer v1.2.0
