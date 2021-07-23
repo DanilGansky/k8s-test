@@ -12,7 +12,7 @@ type Item struct {
 }
 
 func GetItems(maxItems int) []Item {
-	items := make([]Item, maxItems)
+	items := make([]Item, 0, maxItems)
 	for idx := 0; idx < maxItems; idx++ {
 		items[idx] = Item{
 			Title:       fmt.Sprintf("Some item #%d", idx),

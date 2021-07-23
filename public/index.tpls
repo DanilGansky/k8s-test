@@ -8,5 +8,10 @@
 </head>
 <body>
     <h1>Hello from K8S test, <span style="color: tomato;">{{ .ip }}</span></h1>
+    <h3>Info</h3>
+    <ul>
+        <li>Username: {{ .username }}</li>
+        <li>Password: {{ .password }}</li>
+    </ul>
 </body>
 </html>

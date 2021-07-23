@@ -14,6 +14,22 @@ spec:
       containers:
       - name: {{ .Release.Name }}
         image: {{ .Values.Container.Image }}
+        env:
+          - name: USERNAME
+            valueFrom:
+              configMapKeyRef:
+                name: k8s-test-config
+                key: USERNAME
+          - name: ITEMS_QUANTITY
+            valueFrom:
+              configMapKeyRef:
+                name: k8s-test-config
+                key: ITEMS_QUANTITY
+          - name: PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: k8s-test-secret
+                key: PASSWORD
         resources:
           limits:
             cpu: {{ .Values.Resources.MaxCPU }}
@@ -21,5 +37,3 @@ spec:
           requests:
             cpu: {{ .Values.Resources.CPU }}
             memory: {{ .Values.Resources.Memory }}
-        ports:
-        - containerPort: 8000

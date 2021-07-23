@@ -1,64 +1,27 @@
 package main
 
 import (
-	"encoding/json"
-	"k8s-test/storage"
+	"k8s-test/handlers"
+	"k8s-test/middlewares"
 	"log"
-	"net"
 	"net/http"
-	"time"
-
-	"github.com/thedevsaddam/renderer"
+	"os"
+	"strconv"
 )
-
-var (
-	rnd     *renderer.Render
-	localIP string
-)
-
-func init() {
-	opts := renderer.Options{
-		ParseGlobPattern: "./public/*.html",
-	}
-
-	rnd = renderer.New(opts)
-	localIP = getOutboundIP().String()
-}
-
-func getOutboundIP() net.IP {
-	conn, err := net.Dial("udp", "8.8.8.8:80")
-	if err != nil {
-		log.Fatal(err)
-	}
-	defer conn.Close()
-
-	localAddr := conn.LocalAddr().(*net.UDPAddr)
-	return localAddr.IP
-}
-
-func homeHandler(w http.ResponseWriter, r *http.Request) {
-	log.Printf("request from %s at %s", localIP, time.Now().Format("Mon Jan 2 15:04:05 2006"))
-
-	err := rnd.Template(w, http.StatusOK, []string{"./public/index.tpls"}, map[string]interface{}{"ip": localIP})
-	if err != nil {
-		log.Fatalf("error in %s: %s", localIP, err.Error())
-	}
-}
-
-func getItemsHandler(w http.ResponseWriter, r *http.Request) {
-	log.Printf("request from %s at %s", localIP, time.Now().Format("Mon Jan 2 15:04:05 2006"))
-	if err := json.NewEncoder(w).Encode(storage.GetItems(100000)); err != nil {
-		log.Fatalf("error in %s: %s", localIP, err.Error())
-	}
-}
 
 func main() {
 	const port = ":8000"
 
-	http.HandleFunc("/", homeHandler)
-	http.HandleFunc("/items", getItemsHandler)
-	log.Printf("Server started at %s...", port)
+	var (
+		username         = os.Getenv("USERNAME")
+		password         = os.Getenv("PASSWORD")
+		itemsQuantity, _ = strconv.Atoi(os.Getenv("ITEMS_QUANTITY"))
+	)
 
+	http.Handle("/", middlewares.TrackRequest(handlers.Home(username, password)))
+	http.HandleFunc("/items", handlers.Items(itemsQuantity))
+
+	log.Printf("Server started at %s...", port)
 	if err := http.ListenAndServe(port, nil); err != nil {
 		log.Fatal(err)
 	}

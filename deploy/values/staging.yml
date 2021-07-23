@@ -2,3 +2,7 @@
 Autoscaling:
   Min: 3
   Max: 6
+
+Config:
+  Username: STAGING
+  MaxItems: 100000

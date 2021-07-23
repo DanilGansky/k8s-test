@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: k8s-test-config
+data:
+  USERNAME: {{ .Values.Config.Username }}
+  ITEMS_QUANTITY: {{ .Values.Config.MaxItems }}

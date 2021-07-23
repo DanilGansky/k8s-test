@@ -2,3 +2,7 @@
 Autoscaling:
   Min: 4
   Max: 8
+
+Config:
+  Username: PRODUCTION
+  MaxItems: 1000000

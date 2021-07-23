@@ -16,3 +16,7 @@ Container:
 Autoscaling:
   Min: 3
   Max: 6
+
+Config:
+  Username: PRODUCTION
+  MaxItems: 1000000
