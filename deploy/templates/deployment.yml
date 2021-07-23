@@ -13,7 +13,7 @@ spec:
     spec:
       containers:
       - name: {{ .Release.Name }}
-        image: {{ .Values.Container.Image }}
+        image: {{ .Values.container.image }}
         env:
           - name: USERNAME
             valueFrom:
@@ -32,8 +32,8 @@ spec:
                 key: PASSWORD
         resources:
           limits:
-            cpu: {{ .Values.Resources.MaxCPU }}
-            memory: {{ .Values.Resources.MaxMemory }}
+            cpu: {{ .Values.resources.maxCPU }}
+            memory: {{ .Values.resources.maxMemory }}
           requests:
-            cpu: {{ .Values.Resources.CPU }}
-            memory: {{ .Values.Resources.Memory }}
+            cpu: {{ .Values.resources.cpu }}
+            memory: {{ .Values.resources.memory }}

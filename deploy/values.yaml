@@ -1,22 +1,21 @@
 # Default values
-Resources:
-  MaxCPU: 250m
-  MaxMemory: 0.25Gi
+resources:
+  maxCPU: 250m
+  maxMemory: 0.25Gi
 
-  CPU: 200m
-  Memory: 0.2Gi
+  cpu: 200m
+  memory: 0.2Gi
 
-Utilization:
-  CPU: 40
-  Memory: 35
+utilization:
+  cpu: 40
+  memory: 35
 
-Container:
-  Image: dgansky/k8s-test:latest
+container:
+  image: dgansky/k8s-test:latest
 
-Autoscaling:
-  Min: 3
-  Max: 6
+autoscaling:
+  min: 3
+  max: 6
 
-Config:
-  Username: PRODUCTION
-  MaxItems: 1000000
+configMap:
+  username: PRODUCTION

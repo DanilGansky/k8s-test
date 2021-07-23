@@ -1,8 +1,7 @@
 # Values for production
-Autoscaling:
-  Min: 4
-  Max: 8
+autoscaling:
+  min: 4
+  max: 8
 
-Config:
-  Username: PRODUCTION
-  MaxItems: 1000000
+configMap:
+  username: PRODUCTION

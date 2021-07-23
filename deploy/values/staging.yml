@@ -1,8 +1,7 @@
 # Values for staging
-Autoscaling:
-  Min: 3
-  Max: 6
+autoscaling:
+  min: 3
+  max: 6
 
-Config:
-  Username: STAGING
-  MaxItems: 100000
+configMap:
+  username: STAGING

@@ -7,19 +7,19 @@ spec:
     apiVersion: apps/v1
     kind: Deployment
     name: {{ .Release.Name }}-deployment
-  minReplicas: {{ .Values.Autoscaling.Min }}
-  maxReplicas: {{ .Values.Autoscaling.Max }}
+  minReplicas: {{ .Values.autoscaling.min }}
+  maxReplicas: {{ .Values.autoscaling.max }}
   metrics:
     - type: Resource
       resource:
         name: cpu
         target:
           type: Utilization
-          averageUtilization: {{ .Values.Utilization.CPU }}
+          averageUtilization: {{ .Values.utilization.cpu }}
 
     - type: Resource
       resource:
         name: memory
         target:
           type: Utilization
-          averageUtilization: {{ .Values.Utilization.Memory }}
+          averageUtilization: {{ .Values.utilization.memory }}

@@ -14,11 +14,11 @@ type Item struct {
 func GetItems(maxItems int) []Item {
 	items := make([]Item, 0, maxItems)
 	for idx := 0; idx < maxItems; idx++ {
-		items[idx] = Item{
+		items = append(items, Item{
 			Title:       fmt.Sprintf("Some item #%d", idx),
 			Description: "Some description",
 			Price:       rand.Intn(maxItems),
-		}
+		})
 	}
 
 	return items
